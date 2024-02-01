@@ -36,8 +36,8 @@ Material:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _Depth: 0.04
-    - _Strength: 1.07
-    - _normal_strength: 11.01
+    - _Strength: 1.33
+    - _normal_strength: 72.73
     m_Colors:
     - _deep: {r: 0.2950041, g: 0.56161034, b: 0.8301887, a: 0.7294118}
     - _shallow: {r: 0.4873027, g: 0.77053523, b: 0.8113208, a: 0.827451}
