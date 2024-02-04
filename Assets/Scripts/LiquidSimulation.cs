@@ -14,6 +14,5 @@ public class LiquidSimulation : MonoBehaviour
     void LateUpdate()
     {
         transform.rotation = initialRotation;
-        Debug.Log(transform.rotation);
     }
 }
