@@ -7,19 +7,19 @@ public class book : MonoBehaviour
     private bool isOpen;
     public Animator bookAnimator;
     public GameObject canvas;
-
-    private bool canInteract = true;
+    private float lastInteractionTime;
     public float interactionCooldown = 3.0f;
 
     void Start() {
         isOpen = false;
+        lastInteractionTime = -interactionCooldown;
     }
 
-    void OnCollisionEnter (Collision col) {
-        if (canInteract) {
+    public void BottonClick() {
+        float currentTime = Time.time;
+        if (Time.time - lastInteractionTime > interactionCooldown) {
             StartCoroutine(OpenBook());
-            canInteract = false;
-            Invoke("ResetInteractionCooldown", interactionCooldown);
+            lastInteractionTime = currentTime;
         }
     }
 
@@ -29,9 +29,5 @@ public class book : MonoBehaviour
         bookAnimator.SetTrigger(isOpen ? "Open" : "Close");
 
         yield return new WaitForSeconds(1);
-    }
-
-    void ResetInteractionCooldown() {
-        canInteract = true;
     }
 }
