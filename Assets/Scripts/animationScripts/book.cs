@@ -6,20 +6,32 @@ public class book : MonoBehaviour
 {
     private bool isOpen;
     public Animator bookAnimator;
+    public GameObject canvas;
+
+    private bool canInteract = true;
+    public float interactionCooldown = 3.0f;
 
     void Start() {
-        Debug.Log("start!");
         isOpen = false;
     }
 
     void OnCollisionEnter (Collision col) {
-        if (isOpen) {
-            bookAnimator.SetTrigger("Close");
-            isOpen = false;
+        if (canInteract) {
+            StartCoroutine(OpenBook());
+            canInteract = false;
+            Invoke("ResetInteractionCooldown", interactionCooldown);
         }
-        else {
-            bookAnimator.SetTrigger("Open");
-            isOpen = true;
-        }
+    }
+
+    IEnumerator OpenBook() {
+        isOpen = !isOpen;
+        canvas.SetActive(isOpen);
+        bookAnimator.SetTrigger(isOpen ? "Open" : "Close");
+
+        yield return new WaitForSeconds(1);
+    }
+
+    void ResetInteractionCooldown() {
+        canInteract = true;
     }
 }
